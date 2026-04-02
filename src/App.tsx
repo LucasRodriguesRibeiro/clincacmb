@@ -4,21 +4,29 @@
  */
 
 import { motion } from "motion/react";
-import { MessageCircle, Globe, Heart, Stethoscope, Activity } from "lucide-react";
+import { MessageCircle, Globe, Heart, Stethoscope, Activity, Syringe, Pill, Plus, TestTube } from "lucide-react";
 import logoImg from "../imagens/Logo cmb sem fundo.png";
 
 export default function App() {
   return (
     <div className="min-h-[100dvh] bg-gradient-to-br from-slate-50 via-slate-50 to-blue-50/50 flex flex-col items-center justify-between px-5 py-10 sm:p-8 font-sans relative overflow-hidden">
       
-      {/* Background Texture Elements - Extremely Subtle */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.02] flex flex-wrap gap-12 sm:gap-20 p-8 justify-center items-center overflow-hidden">
-        <Stethoscope size={100} className="text-blue-900" />
-        <Heart size={80} className="text-blue-900" />
-        <Activity size={90} className="text-blue-900" />
-        <Stethoscope size={110} className="rotate-45 text-blue-900 hidden sm:block" />
-        <Heart size={80} className="-rotate-12 text-blue-900" />
-        <Activity size={100} className="rotate-90 text-blue-900" />
+      {/* Background Texture Elements - Medical Pattern */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.04] flex flex-wrap justify-center content-start gap-6 sm:gap-10 p-4 overflow-hidden z-0 w-full h-[120vh] -top-10">
+        {Array.from({ length: 80 }).map((_, i) => {
+          const icons = [Stethoscope, Heart, Syringe, Activity, Pill, Plus, TestTube];
+          const Icon = icons[i % icons.length];
+          const rotate = [0, 45, 90, -45, 15, -15, 180, 75, -75, 120][i % 10];
+          const size = [32, 40, 48, 56, 36, 64][i % 6];
+          const mt = i % 2 === 0 ? 'mt-4' : '-mt-4';
+          const ml = i % 3 === 0 ? 'ml-6' : '-ml-2';
+          
+          return (
+            <div key={i} style={{ transform: `rotate(${rotate}deg)` }} className={`text-[#E30613] ${mt} ${ml}`}>
+              <Icon size={size} strokeWidth={1.5} />
+            </div>
+          );
+        })}
       </div>
 
       {/* Main Content Container - Perfect width for modern smartphones */}
